@@ -9,6 +9,7 @@ namespace SisJur.Models
         }
 
         public DbSet<Area> Areas { get; set; }
+        public DbSet<Advogado> Advogados { get; set; }
 
     }
 }
