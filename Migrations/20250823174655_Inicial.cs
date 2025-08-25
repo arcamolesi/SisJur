@@ -5,18 +5,31 @@
 namespace SisJur.Migrations
 {
     /// <inheritdoc />
-    public partial class advogado : Migration
+    public partial class Inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Areas",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    descricao = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Areas", x => x.id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Advogados",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nome = table.Column<string>(type: "nvarchar(35)", maxLength: 35, nullable: false),
+                    nome = table.Column<string>(type: "varchar(35)", maxLength: 35, nullable: false),
                     cidade = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     estado = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
                     idade = table.Column<int>(type: "int", nullable: false),
@@ -43,6 +56,9 @@ namespace SisJur.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Advogados");
+
+            migrationBuilder.DropTable(
+                name: "Areas");
         }
     }
 }

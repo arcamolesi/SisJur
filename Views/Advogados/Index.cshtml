@@ -25,6 +25,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.idade)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.area)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -42,6 +45,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.idade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.area.descricao)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |

@@ -21,7 +21,8 @@ namespace SisJur.Controllers
         // GET: Advogados
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Advogados.ToListAsync());
+            var contexto = _context.Advogados.Include(a => a.area);
+            return View(await contexto.ToListAsync());
         }
 
         // GET: Advogados/Details/5
@@ -33,6 +34,7 @@ namespace SisJur.Controllers
             }
 
             var advogado = await _context.Advogados
+                .Include(a => a.area)
                 .FirstOrDefaultAsync(m => m.id == id);
             if (advogado == null)
             {
@@ -45,6 +47,7 @@ namespace SisJur.Controllers
         // GET: Advogados/Create
         public IActionResult Create()
         {
+            ViewData["areaid"] = new SelectList(_context.Areas, "id", "descricao");
             return View();
         }
 
@@ -53,7 +56,7 @@ namespace SisJur.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,nome,cidade,estado,idade")] Advogado advogado)
+        public async Task<IActionResult> Create([Bind("id,nome,cidade,estado,idade,areaid")] Advogado advogado)
         {
             if (ModelState.IsValid)
             {
@@ -61,6 +64,7 @@ namespace SisJur.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["areaid"] = new SelectList(_context.Areas, "id", "descricao", advogado.areaid);
             return View(advogado);
         }
 
@@ -77,6 +81,7 @@ namespace SisJur.Controllers
             {
                 return NotFound();
             }
+            ViewData["areaid"] = new SelectList(_context.Areas, "id", "descricao", advogado.areaid);
             return View(advogado);
         }
 
@@ -85,7 +90,7 @@ namespace SisJur.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,nome,cidade,estado,idade")] Advogado advogado)
+        public async Task<IActionResult> Edit(int id, [Bind("id,nome,cidade,estado,idade,areaid")] Advogado advogado)
         {
             if (id != advogado.id)
             {
@@ -112,6 +117,7 @@ namespace SisJur.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["areaid"] = new SelectList(_context.Areas, "id", "descricao", advogado.areaid);
             return View(advogado);
         }
 
@@ -124,6 +130,7 @@ namespace SisJur.Controllers
             }
 
             var advogado = await _context.Advogados
+                .Include(a => a.area)
                 .FirstOrDefaultAsync(m => m.id == id);
             if (advogado == null)
             {

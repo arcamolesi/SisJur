@@ -11,8 +11,8 @@ using SisJur.Models;
 namespace SisJur.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20250818235458_advogado")]
-    partial class advogado
+    [Migration("20250823174655_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,7 +51,8 @@ namespace SisJur.Migrations
                     b.Property<string>("nome")
                         .IsRequired()
                         .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
+                        .HasColumnType("varchar(35)")
+                        .HasColumnName("nome");
 
                     b.HasKey("id");
 

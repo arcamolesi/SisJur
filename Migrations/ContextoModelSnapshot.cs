@@ -48,7 +48,8 @@ namespace SisJur.Migrations
                     b.Property<string>("nome")
                         .IsRequired()
                         .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
+                        .HasColumnType("varchar(35)")
+                        .HasColumnName("nome");
 
                     b.HasKey("id");
 
