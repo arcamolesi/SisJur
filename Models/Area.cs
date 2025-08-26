@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SisJur.Models
 {
-    [Table("Areas")]
+    [Table("areas")]
     public class Area
     {
         [Display(Name = "ID")]

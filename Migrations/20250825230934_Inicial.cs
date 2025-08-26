@@ -11,7 +11,7 @@ namespace SisJur.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Areas",
+                name: "areas",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
@@ -20,11 +20,24 @@ namespace SisJur.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Areas", x => x.id);
+                    table.PrimaryKey("PK_areas", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Advogados",
+                name: "tipoprocessos",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    descricao = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tipoprocessos", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "advogados",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "int", nullable: false)
@@ -33,21 +46,22 @@ namespace SisJur.Migrations
                     cidade = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     estado = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
                     idade = table.Column<int>(type: "int", nullable: false),
-                    areaid = table.Column<int>(type: "int", nullable: true)
+                    areaid = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Advogados", x => x.id);
+                    table.PrimaryKey("PK_advogados", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Advogados_Areas_areaid",
+                        name: "FK_advogados_areas_areaid",
                         column: x => x.areaid,
-                        principalTable: "Areas",
-                        principalColumn: "id");
+                        principalTable: "areas",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Advogados_areaid",
-                table: "Advogados",
+                name: "IX_advogados_areaid",
+                table: "advogados",
                 column: "areaid");
         }
 
@@ -55,10 +69,13 @@ namespace SisJur.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Advogados");
+                name: "advogados");
 
             migrationBuilder.DropTable(
-                name: "Areas");
+                name: "tipoprocessos");
+
+            migrationBuilder.DropTable(
+                name: "areas");
         }
     }
 }

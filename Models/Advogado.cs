@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace SisJur.Models
 {
-    [Table("Advogados")]
+    [Table("advogados")]
     public class Advogado
     {
         [Display(Name = "ID")]
@@ -38,6 +38,9 @@ namespace SisJur.Models
 
         [ForeignKey("areaid")]
         public virtual Area area { get; set; }
-       
-    }
+
+        [Display(Name = "Varas")]
+        List<Vara> listaVaras { get; set; } = new List<Vara>();
+
+        }
 }
