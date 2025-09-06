@@ -56,7 +56,7 @@ namespace SisJur.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,descricao,entrada,tipoprocessoid")] Processo processo)
+        public async Task<IActionResult> Create([Bind("id,descricao,entrada,tipoprocessoid,status")] Processo processo)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace SisJur.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,descricao,entrada,tipoprocessoid")] Processo processo)
+        public async Task<IActionResult> Edit(int id, [Bind("id,descricao,entrada,tipoprocessoid,status")] Processo processo)
         {
             if (id != processo.id)
             {
