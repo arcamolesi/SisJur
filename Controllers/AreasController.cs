@@ -38,7 +38,7 @@ namespace SisJur.Controllers
             {
                 return NotFound();
             }
-            int x = 10; 
+          
 
             return View(area);
         }
