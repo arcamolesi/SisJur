@@ -38,6 +38,7 @@ namespace SisJur.Controllers
             {
                 return NotFound();
             }
+          
 
             return View(area);
         }

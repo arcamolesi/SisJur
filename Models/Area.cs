@@ -11,7 +11,7 @@ namespace SisJur.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get ; set; }
 
-        [Display(Name = "Nome")]
+        [Display(Name = "DESCRIÇÃO")]
         [Required(ErrorMessage = "O campo Nome é obrigatório.")]
         [StringLength(25)]
         public string descricao { get; set; }
