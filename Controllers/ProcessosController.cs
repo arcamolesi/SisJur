@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using SisJur.Migrations;
 using SisJur.Models;
+using static SisJur.Models.Processo;
+using Status = SisJur.Models.Processo.Status;
 
 namespace SisJur.Controllers
 {
@@ -47,6 +50,16 @@ namespace SisJur.Controllers
         // GET: Processos/Create
         public IActionResult Create()
         {
+            var tStatus = Enum.GetValues(typeof(Status))
+                                         .Cast<Status>()
+                                         .Select(e => new SelectListItem
+                                         {
+                                             Value = e.ToString(),
+                                             Text = e.ToString()
+                                         });
+            ViewBag.tStatus = tStatus;
+
+
             ViewData["tipoprocessoid"] = new SelectList(_context.TipoProcessos, "id", "descricao");
             return View();
         }
@@ -56,7 +69,7 @@ namespace SisJur.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,descricao,entrada,tipoprocessoid")] Processo processo)
+        public async Task<IActionResult> Create([Bind("id,descricao,entrada,tipoprocessoid,status")] Processo processo)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +103,7 @@ namespace SisJur.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,descricao,entrada,tipoprocessoid")] Processo processo)
+        public async Task<IActionResult> Edit(int id, [Bind("id,descricao,entrada,tipoprocessoid,status")] Processo processo)
         {
             if (id != processo.id)
             {

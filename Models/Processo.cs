@@ -1,11 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+
+
 namespace SisJur.Models
 {
     [Table("processos")]
     public class Processo
     {
+        public enum Status { Ativo, Suspenso, Arquivado}
 
         [Display(Name = "ID")]
         [Key]
@@ -27,7 +30,9 @@ namespace SisJur.Models
         [ForeignKey("tipoprocessoid")]
         public virtual TipoProcesso tipoprocesso { get; set; }
 
-
+        [Display(Name = "Status")]
+        public Status status { get; set; }
+        
         [Display(Name = "Varas")]
         List<Vara> listaVaras { get; set; } = new List<Vara>();
 
