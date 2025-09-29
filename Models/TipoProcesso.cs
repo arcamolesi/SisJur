@@ -13,12 +13,22 @@ namespace SisJur.Models
 
         [Display(Name = "Descrição")]
         [Required(ErrorMessage = "O campo Descrição é obrigatório.")]
-        [StringLength(25, ErrorMessage ="Tamanho do campo tem que ser menor que 25 caracteres")]
+        [StringLength(25, ErrorMessage = "Tamanho do campo tem que ser menor que 25 caracteres")]
         public string descricao { get; set; }
 
         [Display(Name = "Processos")]
         public List<Processo> listaProcessos { get; set; }
 
+        public TipoProcesso()
+        {
+            descricao = string.Empty;
+            listaProcessos = new List<Processo>();
+        }
 
+        public TipoProcesso(string descricao)
+        {
+            this.descricao = descricao;
+            listaProcessos = new List<Processo>();
+        }
     }
 }

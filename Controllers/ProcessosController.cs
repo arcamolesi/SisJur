@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using SisJur.Migrations;
 using SisJur.Models;
 using static SisJur.Models.Processo;
-using Status = SisJur.Models.Processo.Status;
+using Status = SisJur.Models.Status;
 
 namespace SisJur.Controllers
 {

@@ -12,8 +12,8 @@ using SisJur.Models;
 namespace SisJur.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20250826000006_Varas")]
-    partial class Varas
+    [Migration("20250928230902_inical")]
+    partial class inical
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,6 +94,9 @@ namespace SisJur.Migrations
 
                     b.Property<DateTime>("entrada")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("status")
+                        .HasColumnType("int");
 
                     b.Property<int>("tipoprocessoid")
                         .HasColumnType("int");

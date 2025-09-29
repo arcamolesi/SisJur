@@ -19,6 +19,17 @@ namespace SisJur.Models
         [Display(Name = "Advogados")]
         public List<Advogado> advogados { get; set; }
 
+        public Area()
+        {
+            descricao = string.Empty;
+            advogados = new List<Advogado>();
+        }
+
+        public Area(string descricao)
+        {
+            this.descricao = descricao;
+            advogados = new List<Advogado>();
+        }
 
     }
 }

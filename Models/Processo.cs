@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
-
 namespace SisJur.Models
 {
+    public enum Status { Ativo, Suspenso, Arquivado }
+
     [Table("processos")]
     public class Processo
     {
-        public enum Status { Ativo, Suspenso, Arquivado}
 
         [Display(Name = "ID")]
         [Key]
@@ -16,7 +15,7 @@ namespace SisJur.Models
         public int id { get; set; }
 
         [Display(Name = "Descrição")]
-        [StringLength(50, MinimumLength = 15)]
+        [StringLength(70, MinimumLength = 15)]
         public string descricao { get; set; }
 
         [Display(Name = "Entrada")]

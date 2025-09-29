@@ -12,8 +12,8 @@ using SisJur.Models;
 namespace SisJur.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20250825234357_Processos")]
-    partial class Processos
+    [Migration("20250929021700_processos_v2")]
+    partial class processos_v2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -89,11 +89,14 @@ namespace SisJur.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
                     b.Property<string>("descricao")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
 
                     b.Property<DateTime>("entrada")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("status")
+                        .HasColumnType("int");
 
                     b.Property<int>("tipoprocessoid")
                         .HasColumnType("int");
@@ -123,6 +126,36 @@ namespace SisJur.Migrations
                     b.ToTable("tipoprocessos");
                 });
 
+            modelBuilder.Entity("SisJur.Models.Vara", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<int>("advogadoid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("juiz")
+                        .HasMaxLength(35)
+                        .HasColumnType("nvarchar(35)");
+
+                    b.Property<int>("processoid")
+                        .HasColumnType("int");
+
+                    b.Property<float>("valorcausa")
+                        .HasColumnType("real");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("advogadoid");
+
+                    b.HasIndex("processoid");
+
+                    b.ToTable("varas");
+                });
+
             modelBuilder.Entity("SisJur.Models.Advogado", b =>
                 {
                     b.HasOne("SisJur.Models.Area", "area")
@@ -143,6 +176,25 @@ namespace SisJur.Migrations
                         .IsRequired();
 
                     b.Navigation("tipoprocesso");
+                });
+
+            modelBuilder.Entity("SisJur.Models.Vara", b =>
+                {
+                    b.HasOne("SisJur.Models.Advogado", "Advogado")
+                        .WithMany()
+                        .HasForeignKey("advogadoid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SisJur.Models.Processo", "Processo")
+                        .WithMany()
+                        .HasForeignKey("processoid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Advogado");
+
+                    b.Navigation("Processo");
                 });
 
             modelBuilder.Entity("SisJur.Models.Area", b =>
