@@ -116,7 +116,7 @@ namespace SisJur.Controllers
                 advogado.cidade = vCidade[rand.Next(0, vCidade.Length)];
                 advogado.estado = vEstado[rand.Next(0, vEstado.Length)];
                 advogado.idade = rand.Next(25, 80);
-                advogado.areaid = rand.Next(1, 9);
+                advogado.areaid = rand.Next(1, 8);
 
                 contexto.Advogados.Add(advogado);
             }
@@ -140,7 +140,7 @@ namespace SisJur.Controllers
                 Processo p = new Processo();
                 p.descricao = vDescricaoProcessos[rand.Next(0, vDescricaoProcessos.Length)];
                 p.entrada = DateTime.Now.AddDays(-rand.Next(0, 1825)); // Até 5 anos atrás
-                p.tipoprocessoid = rand.Next(1, 9);
+                p.tipoprocessoid = rand.Next(1, 8);
                 p.status = (Status)rand.Next(0, 3);
                 
                 contexto.Processos.Add(p);
